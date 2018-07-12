@@ -16,7 +16,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 		
-		$pt = Paytabs::getInstance("MERCHANT_EMAIL", "SECRET_KEY");
+	$pt = Paytabs::getInstance("MERCHANT_EMAIL", "SECRET_KEY");
         $result = $pt->create_pay_page(array(
             "merchant_email" => "MERCHANT_EMAIL",
             'secret_key' => "SECRET_KEY",
@@ -51,14 +51,14 @@ class DefaultController extends Controller
         ));
 
 		
-		if($result->response_code == 4012){
-			return $this->redirect($result->payment_url);
+	if($result->response_code == 4012){
+		return $this->redirect($result->payment_url);
         }
-		else{
-			throw new \Exception($result->result);	
-		}
+	else{
+		throw new \Exception($result->result);	
+	}
 		
-		return new Response();
+	return new Response();
     }
 	
 	/**
@@ -66,16 +66,15 @@ class DefaultController extends Controller
     */
     public function responseAction(Request $request)
     {
-		$pt = Paytabs::getInstance("MERCHANT_EMAIL", "SECRET_KEY");
-		$result = $pt->verify_payment($request->request->get('payment_reference'));
-		if($result->response_code == 100){
-			// Payment Success
-			return new Response($result->result);
-		}
-		else{
-			throw new \Exception($result->result);	
-		}
-		
-		return new Response();
+	$pt = Paytabs::getInstance("MERCHANT_EMAIL", "SECRET_KEY");
+	$result = $pt->verify_payment($request->request->get('payment_reference'));
+	if($result->response_code == 100){
+		// Payment Success
 	}
+	else{
+		throw new \Exception($result->result);	
+	}
+		
+	return new Response();
+    }
 }
