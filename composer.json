@@ -1,0 +1,22 @@
+{
+  "name" : "maq89/paytabs-symfony",
+  "version": "1.0.0",
+  "description" : "A Paytabs Payment bundle",
+  "type" : "symfony-bundle",
+  "license": "LGPL-3.0",
+  "authors" : [{
+    "name" : "Musaib Qureshi",
+    "email" : "maq.s89@gmail.com"
+  }],
+  "keywords" : [
+    "paytab bundle"
+  ],
+  "require" : {
+  },
+  "autoload" : {
+    "psr-0" : {
+      "Damas\\PaytabsBundle" : "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
