@@ -16,6 +16,10 @@ $bundles = array(
 );
 ```
 
+Use Namespace
+```php
+use Damas\PaytabsBundle\Util\Paytabs;
+```
 
 ## Example:
 ### Create Payment Page:
