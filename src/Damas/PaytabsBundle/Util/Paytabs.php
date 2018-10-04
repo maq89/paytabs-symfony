@@ -35,7 +35,23 @@ class Paytabs {
         $values['merchant_secretKey'] = $this->merchant_secretKey;
         $values['ip_customer'] = $_SERVER['REMOTE_ADDR'];
         $values['ip_merchant'] = isset($_SERVER['SERVER_ADDR'])? $_SERVER['SERVER_ADDR'] : '::1';
+        $values['state'] = $this->getStateByCountryIso3($values['country'], $values['state']);
+        $values['state_shipping'] = $this->getStateByCountryIso3($values['country'], $values['state_shipping']);
         return json_decode($this->runPost(PAYPAGE_URL, $values));
+    }
+    /**
+     *  Field state and state_shipping should return state to 2 characters for Canada and USA
+     *  A country returns ISO 3 characters, but states requires two characters
+     */
+    private function getStateByCountryIso3($value, $state) {
+            if (in_array($value, ['CA', 'USA'])) {
+                    if (strlen($state) > 2) {
+                        trigger_error("A state/state_shipping for USA and Canada should return only 2 characters.");
+                    }
+        }
+
+        // Return full state name
+        return $state;
     }
     function send_request(){
         $values['ip_customer'] = $_SERVER['REMOTE_ADDR'];
